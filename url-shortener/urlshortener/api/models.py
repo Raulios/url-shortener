@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class ShortedUrl(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	original_url = models.URLField()

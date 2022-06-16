@@ -6,12 +6,8 @@ from rest_framework.decorators import api_view
 from api.models import ShortedUrl
 from api.serializers import UrlSerializer
 
-# Create your views here.
 @api_view(['GET', 'POST'])
 def url_list(request, format=None):
-    """
-    List all code snippets, or create a new snippet.
-    """
     if request.method == 'GET':
         urls = ShortedUrl.objects.all()
         serializer = UrlSerializer(urls, many=True)

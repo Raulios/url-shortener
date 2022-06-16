@@ -17,8 +17,8 @@ function App() {
         })
             .then((res) => res.json())
             .then((data) => {
-                setShorturl(data.shorturl);
-                setReturnLongURL(data.longurl);
+                setShorturl(data.short_url);
+                setReturnLongURL(data.original_url);
                 setLongurl("");
             });
     };

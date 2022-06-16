@@ -8,20 +8,11 @@ from api.models import ShortedUrl
 from api.serializers import UrlSerializer
 from api.utils.codegenerator import generate_random_code
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def url_list(request, format=None):
-    if request.method == 'GET':
-        urls = ShortedUrl.objects.all()
-        serializer = UrlSerializer(urls, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UrlSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+    urls = ShortedUrl.objects.all()
+    serializer = UrlSerializer(urls, many=True)
+    return JsonResponse(serializer.data, safe=False)
 
 @api_view(['POST'])
 def create_short_url(request):
@@ -43,7 +34,7 @@ def create_short_url(request):
 def redirect_url(request, short_url):
 	print(request)
 	print(short_url)
-	
+
 	try:
 	    obj = ShortedUrl.objects.get(short_url="http://localhost:8000/"+short_url)
 	except ShortedUrl.DoesNotExist:

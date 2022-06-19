@@ -7,3 +7,12 @@ export async function generateShortenedUrl(longUrl) {
 
 	return await response.json();
 }
+
+export async function getShortenedUrls() {
+	const response = await fetch("http://127.0.0.1:8000/urls/", {
+	    method: "GET",
+	    headers: { "Content-Type": "application/json" },
+	});
+
+	return await response.json();
+}

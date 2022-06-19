@@ -1,13 +1,18 @@
 import './App.css';
 import { Main } from './feature/Main/component'
 import { Stats } from './feature/Stats/component'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return(
-    <div>
-    <Main></Main>
-    <Stats></Stats>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />}>
+            
+          </Route>
+          <Route path="stats/:shortenedUrlId" element={<Stats />} />
+        </Routes>
+      </BrowserRouter>
     )
 }
 

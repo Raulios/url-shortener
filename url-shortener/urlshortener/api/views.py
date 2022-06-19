@@ -60,3 +60,11 @@ def redirect_url(request, short_url):
 			ShortenedUrlStatPerDay.objects.create(date=datetime.date.today(), shortened_url_id=url.pk)
 
 		return redirect(url.original_url)
+
+@api_view(['DELETE'])
+def delete_short_url(request, pk):
+	try:
+	    url = ShortenedUrl.objects.get(pk=pk)
+	    url.delete();
+	except ShortenedUrl.DoesNotExist:
+	    url = None

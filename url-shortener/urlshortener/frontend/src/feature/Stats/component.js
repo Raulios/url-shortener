@@ -16,9 +16,9 @@ function Stats() {
 	return(
 		<div>
 		{statsPerDay.map((stat) => (
-			<span key={stat.id}>{stat.number_of_clicks}</span>
-		))
-	}
+				<span key={stat.id}>{stat.number_of_clicks}</span>
+			))
+		}
 		</div>
 	)
 }

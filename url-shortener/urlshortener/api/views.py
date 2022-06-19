@@ -68,3 +68,5 @@ def delete_short_url(request, pk):
 	    url.delete();
 	except ShortenedUrl.DoesNotExist:
 	    url = None
+
+	return Response({})

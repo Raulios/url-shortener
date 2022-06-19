@@ -9,8 +9,8 @@ class ShortenedUrl(models.Model):
 	    ordering = ["-created"]
 
 class ShortenedUrlStatPerDay(models.Model):
-    date = models.DateTimeField(max_length=100)
-    number_of_clicks = models.IntegerField()
+    date = models.DateField(max_length=100)
+    number_of_clicks = models.IntegerField(default=1)
     shortened_url = models.ForeignKey(ShortenedUrl, on_delete=models.CASCADE)
 
     class Meta:

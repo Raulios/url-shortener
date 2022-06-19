@@ -18,7 +18,7 @@ def url_list(request, format=None):
 
 @api_view(['GET'])
 def url_stats_list(request, pk, format=None):
-	url_stats = ShortenedUrlStatPerDay.objects.filter(pk=pk)
+	url_stats = ShortenedUrlStatPerDay.objects.filter(shortened_url_id=pk)
 	serializer = ShortenedUrlStatPerDaySerializer(url_stats, many=True)
 	return JsonResponse(serializer.data, safe=False)
 

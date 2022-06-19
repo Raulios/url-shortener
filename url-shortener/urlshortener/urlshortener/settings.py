@@ -109,6 +109,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+ROOT_URL = 'http://localhost:8000/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 

@@ -4,14 +4,15 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from api.models import ShortedUrl
-from api.serializers import UrlSerializer
+from api.models import ShortenedUrl
+from api.serializers import ShortenedUrlSerializer
 from api.utils.codegenerator import generate_random_code
+from django.conf import settings
 
 @api_view(['GET'])
 def url_list(request, format=None):
-    urls = ShortedUrl.objects.all()
-    serializer = UrlSerializer(urls, many=True)
+    urls = ShortenedUrl.objects.all()
+    serializer = ShortenedUrlSerializer(urls, many=True)
     return JsonResponse(serializer.data, safe=False)
 
 @api_view(['POST'])
@@ -19,13 +20,13 @@ def create_short_url(request):
 	data = request.data
 	random_code = generate_random_code()
 	
-	while ShortedUrl.objects.filter(short_url="http://localhost:8000/"+random_code).exists():
+	while ShortenedUrl.objects.filter(short_url=settings.ROOT_URL + random_code).exists():
 	    random_code = generate_random_code()
 
 	original_url = data['original_url']
-	short_url = "http://localhost:8000/"+random_code
+	short_url = settings.ROOT_URL + random_code
 
-	ShortedUrl.objects.create(
+	ShortenedUrl.objects.create(
 	    original_url=original_url,
 	    short_url=short_url
 	)
@@ -36,8 +37,8 @@ def redirect_url(request, short_url):
 	print(short_url)
 
 	try:
-	    obj = ShortedUrl.objects.get(short_url="http://localhost:8000/"+short_url)
-	except ShortedUrl.DoesNotExist:
+	    obj = ShortenedUrl.objects.get(short_url= settings.ROOT_URL +short_url)
+	except ShortenedUrl.DoesNotExist:
 	    obj = None
 
 	if obj is not None:

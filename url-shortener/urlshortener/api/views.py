@@ -25,19 +25,26 @@ def url_stats_list(request, pk, format=None):
 @api_view(['POST'])
 def create_short_url(request):
 	data = request.data
-	random_code = generate_random_code()
-	
-	while ShortenedUrl.objects.filter(short_url=settings.ROOT_URL + random_code).exists():
-	    random_code = generate_random_code()
-
 	original_url = data['original_url']
-	short_url = settings.ROOT_URL + random_code
 
-	ShortenedUrl.objects.create(
-	    original_url=original_url,
-	    short_url=short_url
-	)
-	return Response({'original_url': original_url, 'short_url': short_url})
+	existingUrlQuery = ShortenedUrl.objects.filter(original_url=original_url)
+
+	if existingUrlQuery.exists():
+		return Response({'original_url': original_url, 'short_url': existingUrlQuery[0].short_url})
+	else:
+		random_code = generate_random_code()
+		
+		while ShortenedUrl.objects.filter(short_url=settings.ROOT_URL + random_code).exists():
+		    random_code = generate_random_code()
+
+		
+		short_url = settings.ROOT_URL + random_code
+
+		ShortenedUrl.objects.create(
+		    original_url=original_url,
+		    short_url=short_url
+		)
+		return Response({'original_url': original_url, 'short_url': short_url})
 
 def redirect_url(request, short_url):
 	try:

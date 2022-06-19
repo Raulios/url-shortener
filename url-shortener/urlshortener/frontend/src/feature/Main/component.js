@@ -1,6 +1,7 @@
 import './styles.scss';
 import { useState, useEffect } from "react";
 import { generateShortenedUrl, getShortenedUrls, deleteShortenedUrl } from './service'
+import { Link } from "react-router-dom";
 
 function Main() {
     const [urlList, setUrlList] = useState([]);
@@ -21,6 +22,8 @@ function Main() {
   		    setShorturl(data.short_url);
   		    setReturnLongURL(data.original_url);
   		    setLongurl("");
+          console.log(data);
+          setUrlList([...urlList, data]);
   		});
     };
 
@@ -33,9 +36,9 @@ function Main() {
     };
 
   return (
-    <section  className="Main">
-      <div class="main-page">
-        <div class="main-page__input">
+    <section className="Main">
+      <div className="main-page">
+        <div className="main-page__input">
           <div>
             <input
               type="text"
@@ -61,9 +64,9 @@ function Main() {
               </p>
           </div>
         </div>
-        <div class="main-page__list">
+        <div className="main-page__list">
           {urlList.map((url) => (
-            <div key={url.id}>
+            <div key={url.short_url}>
               <span>{url.short_url}</span>
               <button 
                 type="submit"
@@ -71,6 +74,7 @@ function Main() {
               >
                 delete
               </button>
+              <Link to={`/stats/${url.id}`}>Stats</Link>
             </div>
           ))
         }

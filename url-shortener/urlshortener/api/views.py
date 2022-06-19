@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from api.models import ShortenedUrl, ShortenedUrlStatPerDay
-from api.serializers import ShortenedUrlSerializer
+from api.serializers import ShortenedUrlSerializer, ShortenedUrlStatPerDaySerializer
 from api.utils.codegenerator import generate_random_code
 from django.conf import settings
 import datetime
@@ -18,8 +18,8 @@ def url_list(request, format=None):
 
 @api_view(['GET'])
 def url_stats_list(request, pk, format=None):
-	url_stats = ShortenedUrlStatPerDay.objects.get(pk=pk)
-	serializer = ShortenedUrlStatPerDay(url_stats, many=True)
+	url_stats = ShortenedUrlStatPerDay.objects.filter(pk=pk)
+	serializer = ShortenedUrlStatPerDaySerializer(url_stats, many=True)
 	return JsonResponse(serializer.data, safe=False)
 
 @api_view(['POST'])

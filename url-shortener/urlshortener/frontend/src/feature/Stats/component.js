@@ -1,3 +1,4 @@
+import './styles.scss';
 import { useState, useEffect } from "react";
 import { getStatsPerDay } from './service';
 import { useParams } from "react-router-dom";
@@ -14,15 +15,22 @@ function Stats() {
 	}, []);
 
 	return(
-		<div>
-		{statsPerDay.map((stat) => (
-				<div key={stat.id}>
-					<span>{stat.date}</span>
-					<span>{stat.number_of_clicks}</span>
-				</div>
-			))
-		}
-		</div>
+		<section className="stats-page">
+      		<h1 className="stats-page__title">Stats Page</h1>
+      		<div className="stats-page__header">
+      			<span className="stats-page__text stats-page__text--header">Date</span>
+      			<span className="stats-page__text stats-page__text--header">Num. of Clicks</span>
+      		</div>
+      		<div className="stats-page__item-list">
+      			{statsPerDay.map((stat) => (
+					<div className="stats-page__item" key={stat.id}>
+						<span className="stats-page__text">{stat.date}</span>
+						<span className="stats-page__text">{stat.number_of_clicks}</span>
+					</div>
+				))
+			}
+      		</div>
+		</section>
 	)
 }
 

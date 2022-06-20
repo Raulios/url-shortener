@@ -1,0 +1,48 @@
+$borderRadius: 5px;
+$linear-gradient: linear-gradient(141deg, rgba(2,0,36,1) 0%, rgba(112,9,121,1) 35%, rgba(0,212,255,1) 100%);
+
+.stats-page {
+	width: 100vw;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &__title {
+	    font-size: 64px;
+    	color: white;
+    }
+
+    &__header {
+    	width: 70%;
+    	display: flex;
+    	justify-content: space-between;
+    }
+
+    &__item-list {
+    	width: 70%;
+    }
+
+    &__item {
+    	background-color: white;
+	    border-radius: $borderRadius;
+	    display: flex;
+	    justify-content: space-between;
+	    box-shadow: 4px 4px #515B66;
+    	margin-bottom: 16px;
+	    align-items: center;
+	    padding: 16px;
+    }
+
+    &__text {
+    	font-size: 16px;
+    	font-weight: bold;
+
+    	&--header {
+    		color: white;
+    		padding: 16px;
+    	}
+    }
+}

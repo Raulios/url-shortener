@@ -10,7 +10,6 @@ function Stats() {
 	useEffect(() => {
 		getStatsPerDay(shortenedUrlId).then((data) => {
 			setStatsPerDay(data);
-			console.log(data);
 		});
 	}, []);
 

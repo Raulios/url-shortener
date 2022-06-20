@@ -30,7 +30,8 @@ def create_short_url(request):
 	existingUrlQuery = ShortenedUrl.objects.filter(original_url=original_url)
 
 	if existingUrlQuery.exists():
-		return Response({'original_url': original_url, 'short_url': existingUrlQuery[0].short_url})
+		serializer = ShortenedUrlSerializer(existingUrlQuery[0])
+		return JsonResponse(serializer.data, safe=False)
 	else:
 		random_code = generate_random_code()
 		
@@ -40,11 +41,12 @@ def create_short_url(request):
 		
 		short_url = settings.ROOT_URL + random_code
 
-		ShortenedUrl.objects.create(
+		newUrl = ShortenedUrl.objects.create(
 		    original_url=original_url,
 		    short_url=short_url
 		)
-		return Response({'original_url': original_url, 'short_url': short_url})
+		serializer = ShortenedUrlSerializer(newUrl)
+		return JsonResponse(serializer.data, safe=False)
 
 def redirect_url(request, short_url):
 	try:

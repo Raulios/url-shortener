@@ -19,12 +19,10 @@ function Main() {
         e.preventDefault();
 
         generateShortenedUrl(longurl).then((data) => {
-          console.log(data);
   		    setShorturl(data.short_url);
   		    setReturnLongURL(data.original_url);
   		    setLongurl("");
-          console.log(data);
-          setUrlList([data, ...urlList]);
+          if(!urlList.find(url => url.id === data.id)) setUrlList([data, ...urlList]);
   		});
     };
 
@@ -57,6 +55,7 @@ function Main() {
             Short it!
           </button>
         </div>
+        <div className="main-page__notification">Your shortened url: {shorturl}</div>
       </div>
       <div className="main-page__list">
         {urlList.map((url) => (

@@ -29,11 +29,18 @@ $borderRadius: 5px;
 	    border-radius: $borderRadius 0 0 $borderRadius;
 	    border: 1px solid grey;
 	    padding-left: 16px;
-	    box-shadow: 4px 4px #515B66;
+	    box-shadow: 4px 4px #22203B;
 
 	    &:focus-visible {
 	    	outline: 1px solid purple;
 	    }
+	}
+
+	&__notification {
+		text-align: center;
+	    margin-top: 8px;
+	    font-size: 18px;
+	    color: white;
 	}
 
 	&__main-btn {
@@ -44,7 +51,7 @@ $borderRadius: 5px;
 		font-size: 20px;
 		padding: 16px;
 		cursor: pointer;
-		box-shadow: 4px 4px #515B66;
+		box-shadow: 4px 4px #22203B;
 		transition: background-color 250ms;
 
 		&:hover {
@@ -64,7 +71,7 @@ $borderRadius: 5px;
 	    border-radius: $borderRadius;
 	    display: flex;
 	    justify-content: space-between;
-	    box-shadow: 4px 4px #515B66;
+	    box-shadow: 4px 4px #22203B;
     	margin-bottom: 16px;
 	    align-items: center;
 	    padding-left: 16px;

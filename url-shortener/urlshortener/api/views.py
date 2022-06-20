@@ -53,17 +53,12 @@ def redirect_url(request, short_url):
 	    url = None
 
 	if url is not None:
-		print(url.pk)
-		print(datetime.date.today())
-
 		stats = ShortenedUrlStatPerDay.objects.filter(shortened_url_id=url.pk, date=datetime.date.today())
-		print(stats)
 
 		if stats.exists():
 			stats.update(number_of_clicks=stats[0].number_of_clicks+1)
 
 		else:
-			print('holi')
 			ShortenedUrlStatPerDay.objects.create(date=datetime.date.today(), shortened_url_id=url.pk)
 
 		return redirect(url.original_url)

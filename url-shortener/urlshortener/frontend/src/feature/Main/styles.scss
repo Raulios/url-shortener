@@ -1,18 +1,118 @@
+$borderRadius: 5px;
+$linear-gradient: linear-gradient(141deg, rgba(2,0,36,1) 0%, rgba(112,9,121,1) 35%, rgba(0,212,255,1) 100%);
+
 .main-page {
 	width: 100vw;
-	height: 100vh;
-	background-color: lightblue;
+	height: 100%;
+	background: $linear-gradient;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
     justify-content: center;
+    overflow: hidden;
+
+    &__title {
+	    font-size: 64px;
+    	color: white;
+    }
+
+	&__content {
+		width: 50%;
+		margin-bottom: 32px;
+	}
+
+	&__input-wrapper {
+		width: 100%;
+	    display: flex;
+	    justify-content: center;
+	}
 
 	&__input {
+		width: 50%;
+	    border-radius: $borderRadius 0 0 $borderRadius;
+	    border: 1px solid grey;
+	    padding-left: 16px;
+	    box-shadow: 4px 4px #515B66;
 
+	    &:focus-visible {
+	    	outline: 1px solid purple;
+	    }
+	}
+
+	&__main-btn {
+		background-color: #a33fac;
+    	border-radius: 0 $borderRadius $borderRadius 0;
+		border: none;
+		color: white;
+		font-size: 20px;
+		padding: 16px;
+		cursor: pointer;
+		box-shadow: 4px 4px #515B66;
+		transition: background-color 250ms;
+
+		&:hover {
+			background-color: #d975e2;
+		}
 	}
 
 	&__list {
 		display: flex;
     	flex-direction: column;
+    	width: 70%;
+    	margin-bottom: 64px;
+	}
+
+	&__list-item {
+	    background-color: white;
+	    border-radius: $borderRadius;
+	    display: flex;
+	    justify-content: space-between;
+	    box-shadow: 4px 4px #515B66;
+    	margin-bottom: 16px;
+	    align-items: center;
+	    padding-left: 16px;
+	}
+
+	&__text-wrapper {
+		display: flex;
+    	flex-direction: column;
+	}
+
+	&__text {
+		font-size: 14px;
+
+		&--highlighted {
+			font-size: 20px;
+			font-weight: bold;
+		    margin-bottom: 4px;
+		}
+	}
+
+	&__btn {
+	    padding: 16px;
+        height: 64px;
+	    background-color: #D80000;
+	    border-radius: 0 $borderRadius $borderRadius 0;
+	    border: none;
+	    color: white;
+	    font-size: 16px;
+	    cursor: pointer;
+	    transition: background-color 250ms;
+
+	   	&:hover {
+	   		background-color: #FF0000;
+	   	}
+	}
+
+	&__link {
+		margin-right: 16px;
+	    text-decoration: none;
+	    font-weight: bold;
+	    color: #a33fac;
+	    cursor: pointer;
+
+	    &:hover {
+	    	color: #d975e2;
+	    }
 	}
 }

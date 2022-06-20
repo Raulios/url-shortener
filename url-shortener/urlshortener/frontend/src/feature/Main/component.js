@@ -19,11 +19,12 @@ function Main() {
         e.preventDefault();
 
         generateShortenedUrl(longurl).then((data) => {
+          console.log(data);
   		    setShorturl(data.short_url);
   		    setReturnLongURL(data.original_url);
   		    setLongurl("");
           console.log(data);
-          setUrlList([...urlList, data]);
+          setUrlList([data, ...urlList]);
   		});
     };
 
@@ -36,49 +37,47 @@ function Main() {
     };
 
   return (
-    <section className="Main">
-      <div className="main-page">
-        <div className="main-page__input">
-          <div>
-            <input
-              type="text"
-              name="longurl"
-              value={longurl}
-              onChange={(e) => setLongurl(e.target.value)}
-            />
-            <button
-                type="submit"
-                onClick={(e) => handleSubmit(e)}
-                disabled={!longurl}
-            >
-              shorten
-            </button>
-          </div>
-          <div>
-              <p>Long URL: {returnLongURL}</p>
-              <p
-                  style={{ cursor: "pointer" }}
-                  onClick={() => window.open(returnLongURL)}
-              >
-                  Short URL: {shorturl}
-              </p>
-          </div>
+    <section className="main-page">
+      <h1 className="main-page__title">Definitely not bit.ly</h1>
+      <div className="main-page__content">
+        <div className="main-page__input-wrapper">
+          <input
+            type="text"
+            name="longurl"
+            value={longurl}
+            className="main-page__input"
+            onChange={(e) => setLongurl(e.target.value)}
+          />
+          <button
+              className="main-page__main-btn"
+              type="submit"
+              onClick={(e) => handleSubmit(e)}
+              disabled={!longurl}
+          >
+            Short it!
+          </button>
         </div>
-        <div className="main-page__list">
-          {urlList.map((url) => (
-            <div key={url.short_url}>
-              <span>{url.short_url}</span>
+      </div>
+      <div className="main-page__list">
+        {urlList.map((url) => (
+          <div className="main-page__list-item" key={url.short_url}>
+            <div className="main-page__text-wrapper">
+              <span className="main-page__text main-page__text--highlighted">{url.short_url}</span>
+              <span className="main-page__text">Redirects to: {url.original_url}</span>
+            </div>
+            <div>
+              <Link className="main-page__link" to={`/stats/${url.id}`}>See Link Stats</Link>
               <button 
                 type="submit"
+                className="main-page__btn"
                 onClick={(e) => handleDelete(e, url.id)}
               >
-                delete
+                Delete
               </button>
-              <Link to={`/stats/${url.id}`}>Stats</Link>
             </div>
-          ))
-        }
-        </div>
+          </div>
+        ))
+      }
       </div>
     </section>
   );

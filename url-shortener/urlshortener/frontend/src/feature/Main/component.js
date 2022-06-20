@@ -7,6 +7,7 @@ function Main() {
     const [urlList, setUrlList] = useState([]);
     const [longurl, setLongurl] = useState("");
     const [shorturl, setShorturl] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [returnLongURL, setReturnLongURL] = useState("");
 
     useEffect(() => {
@@ -19,10 +20,15 @@ function Main() {
         e.preventDefault();
 
         generateShortenedUrl(longurl).then((data) => {
-  		    setShorturl(data.short_url);
-  		    setReturnLongURL(data.original_url);
-  		    setLongurl("");
-          if(!urlList.find(url => url.id === data.id)) setUrlList([data, ...urlList]);
+          if(data?.short_url) {
+            setShorturl(data.short_url);
+            setReturnLongURL(data.original_url);
+            setLongurl("");
+            if(!urlList.find(url => url.id === data.id)) setUrlList([data, ...urlList]);
+            setErrorMessage("");
+          } else {
+            setErrorMessage(data);
+          }
   		});
     };
 
@@ -56,6 +62,7 @@ function Main() {
           </button>
         </div>
         <div className="main-page__notification">Your shortened url: {shorturl}</div>
+        <div className="main-page__notification">{errorMessage}</div>
       </div>
       <div className="main-page__list">
         {urlList.map((url) => (

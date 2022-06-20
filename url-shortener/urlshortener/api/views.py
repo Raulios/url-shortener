@@ -8,6 +8,8 @@ from api.models import ShortenedUrl, ShortenedUrlStatPerDay
 from api.serializers import ShortenedUrlSerializer, ShortenedUrlStatPerDaySerializer
 from api.utils.codegenerator import generate_random_code
 from django.conf import settings
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 import datetime
 
 @api_view(['GET'])
@@ -26,27 +28,32 @@ def url_stats_list(request, pk, format=None):
 def create_short_url(request):
 	data = request.data
 	original_url = data['original_url']
+	validator = URLValidator()
 
-	existingUrlQuery = ShortenedUrl.objects.filter(original_url=original_url)
+	try:
+		validator(original_url)
+		existingUrlQuery = ShortenedUrl.objects.filter(original_url=original_url)
 
-	if existingUrlQuery.exists():
-		serializer = ShortenedUrlSerializer(existingUrlQuery[0])
-		return JsonResponse(serializer.data, safe=False)
-	else:
-		random_code = generate_random_code()
-		
-		while ShortenedUrl.objects.filter(short_url=settings.ROOT_URL + random_code).exists():
-		    random_code = generate_random_code()
+		if existingUrlQuery.exists():
+			serializer = ShortenedUrlSerializer(existingUrlQuery[0])
+			return JsonResponse(serializer.data, safe=False, status=200)
+		else:
+			random_code = generate_random_code()
+			
+			while ShortenedUrl.objects.filter(short_url=settings.ROOT_URL + random_code).exists():
+			    random_code = generate_random_code()
 
-		
-		short_url = settings.ROOT_URL + random_code
+			
+			short_url = settings.ROOT_URL + random_code
 
-		newUrl = ShortenedUrl.objects.create(
-		    original_url=original_url,
-		    short_url=short_url
-		)
-		serializer = ShortenedUrlSerializer(newUrl)
-		return JsonResponse(serializer.data, safe=False)
+			newUrl = ShortenedUrl.objects.create(
+			    original_url=original_url,
+			    short_url=short_url
+			)
+			serializer = ShortenedUrlSerializer(newUrl)
+			return JsonResponse(serializer.data, safe=False, status=200)
+	except ValidationError as exception:
+		return Response(exception)
 
 def redirect_url(request, short_url):
 	try:

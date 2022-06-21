@@ -2,8 +2,9 @@ import './styles.scss';
 import { useState, useEffect } from "react";
 import { generateShortenedUrl, getShortenedUrls, deleteShortenedUrl } from './service'
 import { Link } from "react-router-dom";
+import { ItemList } from "../../components/ItemList/component"
 
-function Main() {
+const Main = () => {
     const [urlList, setUrlList] = useState([]);
     const [longurl, setLongurl] = useState("");
     const [shorturl, setShorturl] = useState("");
@@ -64,27 +65,7 @@ function Main() {
         <div className="main-page__notification">Your shortened url: {shorturl}</div>
         <div className="main-page__notification">{errorMessage}</div>
       </div>
-      <div className="main-page__list">
-        {urlList.map((url) => (
-          <div className="main-page__list-item" key={url.short_url}>
-            <div className="main-page__text-wrapper">
-              <span className="main-page__text main-page__text--highlighted">{url.short_url}</span>
-              <span className="main-page__text">Redirects to: {url.original_url}</span>
-            </div>
-            <div>
-              <Link className="main-page__link" to={`/stats/${url.id}`}>See Link Stats</Link>
-              <button 
-                type="submit"
-                className="main-page__btn"
-                onClick={(e) => handleDelete(e, url.id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))
-      }
-      </div>
+      <ItemList urlList={urlList} handleDelete={handleDelete} />
     </section>
   );
 }

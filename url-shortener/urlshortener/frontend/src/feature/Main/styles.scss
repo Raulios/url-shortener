@@ -1,4 +1,4 @@
-$borderRadius: 5px;
+@import '../../utils/custom-variables.scss';
 
 .main-page {
 	width: 100vw;
@@ -15,7 +15,7 @@ $borderRadius: 5px;
 
 	&__content {
 		width: 50%;
-		margin-bottom: 32px;
+		margin-bottom: calc($minSpace * 4);
 	}
 
 	&__input-wrapper {
@@ -29,33 +29,33 @@ $borderRadius: 5px;
 	    border-radius: $borderRadius 0 0 $borderRadius;
 	    border: 1px solid grey;
 	    padding-left: 16px;
-	    box-shadow: 4px 4px #22203B;
+	    box-shadow: $boxShadow;
 
 	    &:focus-visible {
-	    	outline: 1px solid purple;
+	    	outline: 1px solid $mainColor;
 	    }
 	}
 
 	&__notification {
 		text-align: center;
-	    margin-top: 8px;
+	    margin-top: $minSpace;
 	    font-size: 18px;
 	    color: white;
 	}
 
 	&__main-btn {
-		background-color: #a33fac;
+		background-color: $mainColor;
     	border-radius: 0 $borderRadius $borderRadius 0;
 		border: none;
 		color: white;
 		font-size: 20px;
-		padding: 16px;
+		padding: calc($minSpace * 2);
 		cursor: pointer;
-		box-shadow: 4px 4px #22203B;
+		box-shadow: $boxShadow;
 		transition: background-color 250ms;
 
 		&:hover {
-			background-color: #d975e2;
+			background-color: $mainColorLight;
 		}
 	}
 	

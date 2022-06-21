@@ -1,14 +1,14 @@
-$borderRadius: 5px;
+@import '../../../../utils/custom-variables.scss';
 
 .item {
 	background-color: white;
     border-radius: $borderRadius;
     display: flex;
     justify-content: space-between;
-    box-shadow: 4px 4px #22203B;
-	margin-bottom: 16px;
+    box-shadow: $boxShadow;
+	margin-bottom: calc($minSpace * 2);
     align-items: center;
-    padding-left: 16px;
+    padding-left: calc($minSpace * 2);
 
     &__text-wrapper {
 		display: flex;
@@ -21,26 +21,26 @@ $borderRadius: 5px;
 		&--highlighted {
 			font-size: 20px;
 			font-weight: bold;
-		    margin-bottom: 4px;
+		    margin-bottom: calc($minSpace / 2);
 		}
 	}
 
 	&__link {
-		margin-right: 16px;
+		margin-right: calc($minSpace * 2);
 	    text-decoration: none;
 	    font-weight: bold;
-	    color: #a33fac;
+	    color: $mainColor;
 	    cursor: pointer;
 
 	    &:hover {
-	    	color: #d975e2;
+	    	color: $mainColorLight;
 	    }
 	}
 
 	&__btn {
-	    padding: 16px;
-        height: 64px;
-	    background-color: #D80000;
+	    padding: calc($minSpace * 2);
+        height: calc($minSpace * 8);
+	    background-color: $alertColor;
 	    border-radius: 0 $borderRadius $borderRadius 0;
 	    border: none;
 	    color: white;
@@ -49,7 +49,7 @@ $borderRadius: 5px;
 	    transition: background-color 250ms;
 
 	   	&:hover {
-	   		background-color: #FF0000;
+	   		background-color: $alertColorLight;
 	   	}
 	}
 }

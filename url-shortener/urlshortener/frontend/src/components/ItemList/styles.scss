@@ -1,6 +1,8 @@
+@import '../../utils/custom-variables.scss';
+
 .item-list {
 	display: flex;
 	flex-direction: column;
 	width: 70%;
-	margin-bottom: 64px;
+	margin-bottom: calc($minSpace * 8);
 }

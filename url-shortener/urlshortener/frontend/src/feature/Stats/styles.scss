@@ -1,4 +1,4 @@
-$borderRadius: 5px;
+@import '../../utils/custom-variables.scss';
 
 .stats-page {
 	width: 100vw;
@@ -21,7 +21,7 @@ $borderRadius: 5px;
 
     &__item-list {
     	width: 70%;
-    	margin-bottom: 64px;
+    	margin-bottom: calc($minSpace * 8);
     }
 
     &__item {
@@ -29,10 +29,10 @@ $borderRadius: 5px;
 	    border-radius: $borderRadius;
 	    display: flex;
 	    justify-content: space-between;
-	    box-shadow: 4px 4px #22203B;
-    	margin-bottom: 16px;
+	    box-shadow: $boxShadow;
+    	margin-bottom: calc($minSpace * 2);
 	    align-items: center;
-	    padding: 16px;
+	    padding: calc($minSpace * 2);
     }
 
     &__text {
@@ -41,7 +41,7 @@ $borderRadius: 5px;
 
     	&--header {
     		color: white;
-    		padding: 16px;
+    		padding: calc($minSpace * 2);
     	}
     }
 }
